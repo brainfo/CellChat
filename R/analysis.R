@@ -2634,7 +2634,7 @@ netAnalysis_diff_signalingRole_scatter <- function(object, color.use = NULL, com
 #'
 netAnalysis_signalingChanges_scatter <- function(object, idents.use, color.use = c("grey10", "#F8766D", "#00BFC4"), comparison = c(1,2), signaling = NULL, signaling.label = NULL, top.label = 1, signaling.exclude = NULL, xlims = NULL, ylims = NULL,slot.name = "netP", dot.size = 2.5, point.shape = c(21, 22, 24, 23), label.size = 3, dot.alpha = 0.6,
                                                  x.measure = "outdeg", y.measure = "indeg", xlabel = "Differential outgoing interaction strength", ylabel = "Differential incoming interaction strength", title = NULL,
-                                                 font.size = 10, font.size.title = 10, do.label = T, show.legend = T, show.axes = T) {
+                                                 font.size = 10, font.size.title = 10, do.label = T, show.legend = T, show.axes = T, return.data = F) {
   if (is.list(object)) {
     object <- mergeCellChat(object, add.names = names(object))
   }
@@ -2778,8 +2778,11 @@ netAnalysis_signalingChanges_scatter <- function(object, idents.use, color.use =
     gg <- gg + theme_void()
   }
 
-  gg
-
+  if (return.data) {
+    return(list(df = df, plot = gg))
+  } else {
+    return(gg)
+  }
 }
 
 
